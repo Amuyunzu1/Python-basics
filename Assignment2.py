@@ -1,5 +1,5 @@
 # check a number if it's even or odd
-attempts= 3 # Maximum attempts allowed
+attempts= 4 # Maximum attempts allowed
 
 while attempts > 0:
      number = int(input(f"Enter a number. You have {attempts} attempts left:"))
@@ -12,7 +12,7 @@ while attempts > 0:
      else:
             print(number, "is odd.")
 
-            attempts -= 3
+            attempts -= 4
             # Reduce remaining attempts
             
             if attempts == 0:
