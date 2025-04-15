@@ -1,0 +1,206 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tyzelectronics</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f5f5f5;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .product {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 250px;
+      text-align: center;
+    }
+
+    .product img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .product h3 {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    .product button {
+      padding: 10px 15px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .cart {
+      margin-top: 30px;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .cart h2 {
+      margin-top: 0;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .cart-item button {
+      background: red;
+      padding: 5px;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .empty {
+      font-style: italic;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+<div style="display: flex; align-items: center; justify-content: flex-end; margin-bottom: 20px;">
+    <div style="position: relative; cursor: pointer;">
+        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart Icon" style="width: 40px; height: 40px;" />
+        <span id="cart-count" style="
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: red;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 2px 6px;
+        ">0</span>
+    </div>    
+</div>
+
+  <h1>Simple Add to Cart Example</h1>
+  <div class="container" id="product-list">
+    <!-- Products will be loaded here -->
+  </div>
+
+  <div class="cart" id="cart">
+    <h2>Your Cart</h2>
+    <div id="cart-items">
+      <p class="empty">Cart is empty</p>
+    </div>
+  </div>
+
+  <script>
+    // Sample products using Pexels images (just use public image links)
+    const products = [
+      {
+        id: 1,
+        name: "Bontel T1000 _ Wireless Desktop Phone _ SMS Feature,White",
+        image: "https://images.pexels.com/photos/17058039/pexels-photo-17058039/free-photo-of-telephone-under-tv.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      },
+      {
+        id: 2,
+        name: "Vellmax 9 Watts 2 Colour Changing LED Bulb",
+        image: "https://images.pexels.com/photos/3946168/pexels-photo-3946168.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      },
+      {
+        id: 3,
+        name: "Logitech speakers set",
+        image: "https://images.pexels.com/photos/13378811/pexels-photo-13378811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      },
+      {
+        id: 4,
+        name: "Apple Iphone 7Plus Silver",
+        image: "https://images.pexels.com/photos/887751/pexels-photo-887751.jpeg?auto=compress&cs=tinysrgb&w=600",
+      }
+    ];
+
+    const cart = [];
+
+    function updateCartCount() {
+        const cartCount = document.getElementById("cart-count");
+        cartCount.textContent = cart.length;
+    }
+
+    function renderProducts() {
+      const productList = document.getElementById("product-list");
+      productList.innerHTML = "";
+
+      products.forEach(product => {
+        const card = document.createElement("div");
+        card.className = "product";
+        card.innerHTML = `
+          <img src="${product.image}?auto=compress&cs=tinysrgb&h=350" alt="${product.name}" />
+          <h3>${product.name}</h3>
+          <button onclick="addToCart(${product.id})">Add to Cart</button>
+        `;
+        productList.appendChild(card);
+      });
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById("cart-items");
+      cartItems.innerHTML = "";
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="empty">Cart is empty</p>';
+        return;
+      }
+
+      cart.forEach(item => {
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "cart-item";
+        itemDiv.innerHTML = `
+          <span>${item.name}</span>
+          <button onclick="removeFromCart(${item.id})">Remove</button>
+        `;
+        cartItems.appendChild(itemDiv);
+      });
+    }
+
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      const alreadyInCart = cart.find(p => p.id === id);
+      if (!alreadyInCart) {
+        cart.push(product);
+        renderCart();
+        updateCartCount(); // Update cart count
+      } else {
+        alert("Item already in cart!");
+      }
+    }
+
+    function removeFromCart(id) {
+      const index = cart.findIndex(p => p.id === id);
+      if (index !== -1) {
+        cart.splice(index, 1);
+        renderCart();
+        updateCartCount(); // Update cart count
+      }
+    }
+
+    // Initialize
+    renderProducts();
+    renderCart();
+    updateCartCount(); // Initialize cart count on page load
+  </script>
+</body>
+</html>

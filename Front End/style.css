@@ -1,0 +1,75 @@
+/* General Styling */
+body {
+    font-family: Poppins, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Form Container */
+form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+}
+
+/* Form Headings */
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Label Styling */
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Input Fields */
+input[type="text"], 
+input[type="email"], 
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Textarea Styling */
+textarea {
+    resize: vertical; /* Allows resizing only up/down */
+    height: 100px;
+}
+
+/* Submit Button */
+input[type="submit"] {
+    background-color: #a00c0c;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+/* Button Hover Effect */
+input[type="submit"]:hover {
+    background-color: #ab0505;
+}
+
+/* Responsive Design */
+@media (max-width: 400px) {
+    form {
+        width: 90%;
+    }
+}
